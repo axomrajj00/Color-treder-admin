@@ -2,136 +2,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Online Zone</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #eef2f3;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 {
-      color: #222;
-    }
-    .section {
-      background: #fff;
-      padding: 20px;
-      border-radius: 15px;
-      margin: 20px auto;
-      width: 90%;
-      max-width: 600px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
-    input, select, button {
-      margin: 10px;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-    }
-    #popup {
-      display: none;
-      position: fixed;
-      top: 20%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #222;
-      color: white;
-      padding: 20px;
-      border-radius: 10px;
-      font-size: 20px;
-      z-index: 999;
-    }
-    .hidden {
-      display: none;
-    }
-    #history {
-      margin-top: 20px;
-      text-align: left;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Online Zone - Color Prediction</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+  <header>
+    <h1>Online Zone</h1>
+    <button id="freeRechargeBtn">Free Recharge</button>
+  </header>
 
-<h1>Online Zone</h1>
+  <main>
+    <section id="result-popup" class="hidden">
+      <p id="resultText">Waiting for result...</p>
+    </section>
 
-<div class="section">
-  <p><strong>Current Balance: <span id="balance">₹0</span></strong></p>
-  <button onclick="freeRecharge()">Free Recharge</button>
-</div>
+    <section id="manual-entry">
+      <h3>Manual Result Entry</h3>
+      <label>Color:
+        <select id="color">
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="violet">Violet</option>
+        </select>
+      </label>
+      <label>Number:
+        <select id="number">
+          <option value="">--</option>
+          ${[...Array(10).keys()].map(n => `<option value="${n}">${n}</option>`).join('')}
+        </select>
+      </label>
+      <label>Big/Small:
+        <select id="bigSmall">
+          <option value="big">Big</option>
+          <option value="small">Small</option>
+        </select>
+      </label>
+      <button onclick="submitResult()">Submit</button>
+    </section>
 
-<div class="section">
-  <h3>Upload Screenshot</h3>
-  <input type="file" id="screenshotInput" accept="image/*" onchange="onScreenshotUpload()">
-</div>
+    <section id="result-history">
+      <h3>Result History</h3>
+      <ul id="historyList"></ul>
+    </section>
+  </main>
 
-<div class="section" id="manualInput">
-  <h3>Manual Result Prediction</h3>
-  <label>Color:</label>
-  <select id="colorSelect">
-    <option>Red</option>
-    <option>Green</option>
-    <option>Violet</option>
-  </select>
-  <label>Big/Small:</label>
-  <select id="sizeSelect">
-    <option>Big</option>
-    <option>Small</option>
-  </select>
-  <label>Number:</label>
-  <select id="numberSelect">
-    <option value="">Select</option>
-    ${[...Array(10)].map((_, i) => `<option>${i}</option>`).join("")}
-  </select>
-  <button onclick="showPrediction()">Submit</button>
-</div>
-
-<div class="section">
-  <h3>Prediction Result History</h3>
-  <div id="history"></div>
-</div>
-
-<div id="popup">Next Prediction: ...</div>
-
-<script>
-  let balance = 0;
-  function freeRecharge() {
-    balance += 100;
-    document.getElementById('balance').textContent = `₹${balance}`;
-    alert("₹100 added to your balance!");
-  }
-
-  function onScreenshotUpload() {
-    document.getElementById('manualInput').classList.add('hidden');
-    showPopup("Screenshot Uploaded - Online Zone");
-  }
-
-  function showPrediction() {
-    const color = document.getElementById("colorSelect").value;
-    const size = document.getElementById("sizeSelect").value;
-    const number = document.getElementById("numberSelect").value;
-    const resultText = `Color: ${color}, Size: ${size}, Number: ${number}`;
-    showPopup("Next Prediction: " + resultText);
-    addToHistory(resultText);
-  }
-
-  function showPopup(text) {
-    const popup = document.getElementById("popup");
-    popup.textContent = text;
-    popup.style.display = "block";
-    setTimeout(() => {
-      popup.style.display = "none";
-    }, 3000);
-  }
-
-  function addToHistory(result) {
-    const history = document.getElementById("history");
-    const entry = document.createElement("p");
-    entry.textContent = result;
-    history.prepend(entry);
-  }
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Online Zone - Color Prediction</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <h1>Online Zone</h1>
+    <button id="freeRechargeBtn">Free Recharge</button>
+  </header>
+
+  <main>
+    <section id="result-popup" class="hidden">
+      <p id="resultText">Waiting for result...</p>
+    </section>
+
+    <section id="manual-entry">
+      <h3>Manual Result Entry</h3>
+      <label>Color:
+        <select id="color">
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="violet">Violet</option>
+        </select>
+      </label>
+      <label>Number:
+        <select id="number">
+          <option value="">--</option>
+          ${[...Array(10).keys()].map(n => `<option value="${n}">${n}</option>`).join('')}
+        </select>
+      </label>
+      <label>Big/Small:
+        <select id="bigSmall">
+          <option value="big">Big</option>
+          <option value="small">Small</option>
+        </select>
+      </label>
+      <button onclick="submitResult()">Submit</button>
+    </section>
+
+    <section id="result-history">
+      <h3>Result History</h3>
+      <ul id="historyList"></ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
