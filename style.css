@@ -1,0 +1,71 @@
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom right, #101010, #1c1c1c);
+    color: white;
+    text-align: center;
+    padding: 30px;
+  }
+
+  h1 {
+    font-size: 32px;
+    color: #ffcc00;
+    margin-bottom: 20px;
+  }
+
+  .upload-section, .manual-input, .result-history {
+    background: #2c2c2c;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 12px;
+    max-width: 400px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  }
+
+  input, select, button {
+    padding: 10px;
+    margin: 10px;
+    width: 80%;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  button {
+    background-color: #ffcc00;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  #popup {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #111;
+    padding: 15px 25px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 18px;
+    box-shadow: 0 0 10px #ffcc00;
+    z-index: 1000;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .result-history {
+    text-align: left;
+    max-width: 500px;
+  }
+
+  .result-item {
+    border-bottom: 1px solid #444;
+    padding: 8px 0;
+    font-size: 15px;
+  }
+</style>
+
