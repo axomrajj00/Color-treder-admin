@@ -1,41 +1,35 @@
 
-<script>
-  function showPopup(message) {
-    const popup = document.getElementById('popup');
-    popup.innerText = message;
-    popup.classList.remove('hidden');
-    setTimeout(() => {
-      popup.classList.add('hidden');
-    }, 3000); // Popup auto-hide after 3 seconds
-  }
+let resultHistory = [];
 
-  function onScreenshotUpload() {
-    // Hide manual input fields
-    document.getElementById('manualInput').classList.add('hidden');
+document.getElementById("freeRechargeBtn").onclick = () => {
+  alert("₹100 Free Recharge Added!");
+};
 
-    // Show "Waiting..." first
-    showPopup("Waiting...");
+function submitResult() {
+  const color = document.getElementById("color").value;
+  const number = document.getElementById("number").value;
+  const bigSmall = document.getElementById("bigSmall").value;
 
-    // Then show result message after 3 seconds
-    setTimeout(() => {
-      showPopup("Screenshot Uploaded - Online Zone");
-    }, 3000);
-  }
+  const result = `${color.toUpperCase()} - ${number} - ${bigSmall.toUpperCase()}`;
+  showPopup(result);
+  addToHistory(result);
+}
 
-  function onSubmitManual() {
-    const color = document.getElementById('color').value;
-    const number = document.getElementById('number').value;
-    const size = document.getElementById('size').value;
+function showPopup(text) {
+  const popup = document.getElementById("result-popup");
+  const resultText = document.getElementById("resultText");
 
-    const result = `Color: ${color}, Number: ${number}, Size: ${size}`;
-    showPopup(result);
-  }
+  resultText.textContent = text;
+  popup.classList.remove("hidden");
 
-  function onFileInputChange() {
-    const file = document.getElementById('screenshotInput').files[0];
-    if (file) {
-      onScreenshotUpload();
-    }
-  }
-</script>
+  setTimeout(() => {
+    popup.classList.add("hidden");
+  }, 3000);
+}
+
+function addToHistory(text) {
+  resultHistory.unshift(text);
+  const historyList = document.getElementById("historyList");
+  historyList.innerHTML = resultHistory.map(item => `<li>${item}</li>`).join('');
+}
 
